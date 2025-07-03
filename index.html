@@ -1,31 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="img/flowers.png" type="image/x-icon">
-    <title>Flowers</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>@farhorizon | Link in Bio</title>
+  <link rel="stylesheet" href="style/main.css" />
+  <link rel="icon" href="assets/favicon.png" />
 </head>
 <body>
-    <div class="greetings">
-    <!-- silahkan menambah kata sesuai keinginan dengan <span>text...</span -->
-        <span>H</span>
-        <span>A</span>
-        <span>L</span>
-        <span>L</span>
-        <span>O</span>
+
+  <div class="theme-toggle" id="theme-toggle">
+    <div class="toggle-slider"></div>
+    <div class="icon sun">☀️</div>
+    <div class="icon moon">🌙</div>
+  </div>
+
+  <div class="container">
+    <img src="assets/profile.png" alt="Profile" class="profile-img" />
+    <h1>@farhorizon</h1>
+    <p class="bio">Seputar perjalanan, inspirasi, dan sedikit seni 🌊</p>
+
+    <div class="link-card" 
+         data-title="Instagram"
+         data-img="assets/ig.jpg"
+         data-desc="Lihat inspirasi visual & cerita perjalanan kami di Instagram."
+         data-url="https://instagram.com/farhorizon">
+      🌈 Instagram
     </div>
-    <div class="description">
-        <span>Aku ada hadiah spesial buat kamu!!</span>
+
+    <div class="link-card" 
+         data-title="Shopee"
+         data-img="assets/shopee.jpg"
+         data-desc="Beli produk eksklusif Farhorizon langsung dari toko Shopee kami."
+         data-url="https://shopee.co.id/farhorizon">
+      🛒 Shopee Store
     </div>
-    <div class="button">
-        <button>
-            <a href="flower.html">Klik disini</a>
-        </button>
-        
+
+    <div class="link-card" 
+         data-title="WhatsApp"
+         data-img="assets/wa.jpg"
+         data-desc="Hubungi kami langsung via WhatsApp untuk tanya atau kerjasama."
+         data-url="https://wa.me/6281234567890">
+      📲 WhatsApp Chat
     </div>
-    <embed src="/music/Naruto Filler Sound.mp3" loop="true" autostart="true" width="2" height="0"> 
+
+    <div class="link-card" 
+         data-title="Email"
+         data-img="assets/email.jpg"
+         data-desc="Kirim pertanyaan atau pesan pribadi melalui email."
+         data-url="mailto:farhorizon@email.com">
+      📧 Email
+    </div>
+
+    <footer>Made with ☕ by Farhorizon</footer>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal-content">
+      <img id="modal-img" src="" alt="modal image">
+      <h2 id="modal-title"></h2>
+      <p id="modal-desc"></p>
+      <a id="modal-link" href="#" target="_blank" class="modal-button">Buka Link 🔗</a>
+    </div>
+  </div>
+
+  <script src="scripts/main.js"></script>
 </body>
 </html>
