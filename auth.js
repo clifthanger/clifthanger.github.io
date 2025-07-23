@@ -24,13 +24,22 @@ document.addEventListener("DOMContentLoaded", () => {
       const user = credentials.find(row => row[0] === inputId && row[1] === inputPw);
 
       if (user) {
+        const frame = document.getElementById("content-frame");
+        const loginBox = document.getElementById("login-container");
+
         if (inputId === "single") {
-          window.location.href = "/flipbook/";
+          frame.src = "/flipbook/";
         } else if (inputId === "bundling") {
-          window.location.href = "/bukucerita/";
+          frame.src = "/bukucerita/";
         } else {
           errorBox.textContent = "Login berhasil tapi ID tidak dikenali.";
+          return;
         }
+
+        // Tampilkan iframe, sembunyikan form
+        loginBox.style.display = "none";
+        frame.style.display = "block";
+
       } else {
         errorBox.textContent = "ID atau password salah.";
       }
