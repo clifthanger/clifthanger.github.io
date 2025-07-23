@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Viewer Buku</title>
+  <title>Loading...</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Fonts dan CSS -->
@@ -65,20 +65,6 @@
       background-color: #999;
     }
 
-    #back-button {
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      z-index: 9999;
-      padding: 8px 12px;
-      background: #333;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 14px;
-      cursor: pointer;
-    }
-
     #back-button:hover {
       background: #555;
     }
@@ -89,8 +75,6 @@
   </style>
 </head>
 <body>
-
-<button id="back-button" onclick="window.location.href='index.html'">← Kembali ke Rak Buku</button>
 
 <div class="logo-backs"></div>
 <audio id="audio" src="flipbook/pics/page-flip.mp3"></audio>
@@ -189,6 +173,13 @@
       elem.msRequestFullscreen();
     }
   }
+  
+    // Update title halaman secara dinamis
+  if (book) {
+    const cleanTitle = book.replace(/[_\-]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    document.title = cleanTitle + " FlipBook";
+  }
+
 </script>
 
 </body>
