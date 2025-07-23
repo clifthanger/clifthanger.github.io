@@ -1,3 +1,4 @@
+// auth.js
 document.addEventListener("DOMContentLoaded", () => {
   const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSRjwOYie3B5Jf4ETxcM0Ts48P1i4txaA14IUNNVlW3Ej8Wy7_KmogWpeUTpMnRKi1l-50v2QOiX4jg/pub?output=csv';
 
@@ -8,33 +9,21 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .then(csv => {
       const rows = csv.trim().split('\n').map(line => line.split(','));
-      const credentials = rows.slice(1).map(([id, pass]) => ({ id: id.trim(), password: pass.trim() })); // perhatikan: 'password'
+      const credentials = rows.slice(1).map(([id, pass]) => ({ id: id.trim(), pass: pass.trim() }));
 
-// Prompt login yang tidak bisa di-cancel
-      let inputId = "", inputPass = "";
-      while (!inputId) {
-        inputId = prompt("Masukkan ID:");
-        if (inputId === null) inputId = "";
-      }
-      while (!inputPass) {
-        inputPass = prompt("Masukkan Password:");
-        if (inputPass === null) inputPass = "";
-      }
+      let inputId = prompt("Masukkan ID:");
+      let inputPass = prompt("Masukkan Password:");
 
-      const validUser = credentials.find(cred =>
-        cred.id === inputId && cred.password === inputPass
-      );
+      const isValid = credentials.some(entry => entry.id === inputId && entry.pass === inputPass);
 
-      if (validUser) {
-        console.log("Login berhasil:", inputId);
-        tampilkanBuku();
+      if (isValid) {
+        document.getElementById("mainContent").style.display = "block";
       } else {
-        alert("ID atau Password salah.");
-        location.reload();
+        document.body.innerHTML = "<h2 style='text-align:center;margin-top:20%'>🚫 ID atau Password salah.</h2>";
       }
     })
-    .catch(error => {
-      alert("Gagal memuat data autentikasi.");
-      console.error("Gagal memuat data autentikasi:", error);
+    .catch(err => {
+      console.error("Gagal memuat data autentikasi:", err);
+      document.body.innerHTML = "<h2 style='text-align:center;margin-top:20%'>🔌 Gagal memuat data autentikasi.</h2>";
     });
 });
