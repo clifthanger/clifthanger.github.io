@@ -3,68 +3,87 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>@farhorizon | Link in Bio</title>
-  <link rel="stylesheet" href="style/main.css" />
-  <link rel="icon" href="assets/favicon.png" />
+  <title>Login Buku Digital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: linear-gradient(to right, #ffecd2, #fcb69f);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      user-select: none;
+    }
+
+    .login-box {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    .login-box h2 {
+      margin-bottom: 1.5rem;
+    }
+
+    input {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #ff6f61;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #e65c50;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
 
-  <div class="theme-toggle" id="theme-toggle">
-    <div class="toggle-slider"></div>
-    <div class="icon sun">☀️</div>
-    <div class="icon moon">🌙</div>
+  <div class="login-box">
+    <h2>Masuk ke Buku Digital</h2>
+    <form id="loginForm">
+      <input type="text" id="id" placeholder="ID Pengguna" required />
+      <input type="password" id="password" placeholder="Kata Sandi" required />
+      <button type="submit">Login</button>
+      <div class="error" id="errorMsg"></div>
+    </form>
   </div>
 
-  <div class="container">
-    <img src="assets/profile.png" alt="Profile" class="profile-img" />
-    <h1>@farhorizon</h1>
-    <p class="bio">Seputar perjalanan, inspirasi, dan sedikit seni 🌊</p>
+  <script src="auth.js"></script>
 
-    <div class="link-card" 
-         data-title="Instagram"
-         data-img="assets/ig.jpg"
-         data-desc="Lihat inspirasi visual & cerita perjalanan kami di Instagram."
-         data-url="https://instagram.com/farhorizon">
-      🌈 Instagram
-    </div>
+  <script>
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('keydown', e => {
+      if (e.key === "F12" || 
+          (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key.toUpperCase())) || 
+          (e.ctrlKey && e.key === 'u')) {
+        e.preventDefault();
+        return false;
+      }
+    });
+  </script>
 
-    <div class="link-card" 
-         data-title="Shopee"
-         data-img="assets/shopee.jpg"
-         data-desc="Beli produk eksklusif Farhorizon langsung dari toko Shopee kami."
-         data-url="https://shopee.co.id/farhorizon">
-      🛒 Shopee Store
-    </div>
-
-    <div class="link-card" 
-         data-title="WhatsApp"
-         data-img="assets/wa.jpg"
-         data-desc="Hubungi kami langsung via WhatsApp untuk tanya atau kerjasama."
-         data-url="https://wa.me/6281234567890">
-      📲 WhatsApp Chat
-    </div>
-
-    <div class="link-card" 
-         data-title="Email"
-         data-img="assets/email.jpg"
-         data-desc="Kirim pertanyaan atau pesan pribadi melalui email."
-         data-url="mailto:farhorizon@email.com">
-      📧 Email
-    </div>
-
-    <footer>Made with ☕ by Farhorizon</footer>
-  </div>
-
-  <!-- Modal -->
-  <div class="modal-overlay" id="modal">
-    <div class="modal-content">
-      <img id="modal-img" src="" alt="modal image">
-      <h2 id="modal-title"></h2>
-      <p id="modal-desc"></p>
-      <a id="modal-link" href="#" target="_blank" class="modal-button">Buka Link 🔗</a>
-    </div>
-  </div>
-
-  <script src="scripts/main.js"></script>
 </body>
 </html>
