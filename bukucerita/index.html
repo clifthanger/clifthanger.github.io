@@ -2,13 +2,11 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <title>Craftie Joy FlipBook</title>
+  <title>Craftie Joy FlipBook📖</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -36,22 +34,21 @@
       margin: auto;
     }
 
-	.book {
-	  position: relative;
-	  background: #fff;
-	  border-radius: 10px;
-	  overflow: hidden;
-	  cursor: pointer;
-	  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-	  transition: transform 0.3s ease;
-	  width: 250px; /* fix lebar buku */
-	  aspect-ratio: 3 / 4; /* bentuk proporsi buku */
-	  display: flex;
-	  flex-direction: column;
-	  align-items: center;
-	  justify-content: flex-start;
-	}
-
+    .book {
+      position: relative;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease;
+      width: 250px;
+      aspect-ratio: 3 / 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
 
     .book:hover {
       transform: translateY(-8px);
@@ -69,49 +66,88 @@
       z-index: 2;
     }
 
+    .book img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
-	.book img {
-	  width: 100%;
-	  height: 100%;
-	  object-fit: cover;
-	  display: block;
-	}
-
-
-
-
-	.book-title {
-	  padding: 6px 6px; /* atas-bawah 10px, kiri-kanan 8px */
-	  text-align: center;
-	  font-weight: 600;
-	  font-size: 0.95em;
-	  background: #fffef9;
-	  color: #5a4231;
-	  position: relative;
-	  z-index: 1;
-	}
-
+    .book-title {
+      padding: 6px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.95em;
+      background: #fffef9;
+      color: #5a4231;
+      position: relative;
+      z-index: 1;
+    }
 
     @media (hover: hover) {
       .book:hover::before {
         background: linear-gradient(to right, #d9af7b, #fff5df);
       }
     }
+
+    /* Iframe Overlay */
+    #viewerOverlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 9999;
+    }
+
+    #viewerIframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    #closeViewer {
+      position: absolute;
+      top: 15px;
+      left: 10px;
+      background: #fff;
+      color: #000;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 10000;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+
+    #closeViewer:hover {
+      background: #333;
+      color: #fff;
+    }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>Craftie Joy FlipBook</h1>
+  <h1>Silahkan pilih buku cerita yang akan dibaca</h1>
 </header>
 
 <div id="bookshelf"></div>
+
+<!-- Iframe Overlay -->
+<div id="viewerOverlay">
+  <button id="closeViewer" onclick="closeViewer()">Tutup</button>
+  <iframe id="viewerIframe" allowfullscreen></iframe>
+</div>
 
 <script>
   const books = [
     { title: "Kancil dan Buaya", folder: "KancilBuaya", pages: 12 },
     { title: "Cindelaras", folder: "Cindelaras", pages: 12 },
-    // Tambahkan buku lain di sini
+    // Tambah buku lain di sini
   ];
 
   const shelf = document.getElementById("bookshelf");
@@ -119,7 +155,7 @@
   books.forEach(book => {
     const container = document.createElement("div");
     container.className = "book";
-    container.onclick = () => loadBook(book.folder, book.pages);
+    container.onclick = () => openBook(book.folder, book.pages, book.title);
 
     const img = document.createElement("img");
     img.src = `data/${book.folder}/1.jpg`;
@@ -134,8 +170,22 @@
     shelf.appendChild(container);
   });
 
-  function loadBook(folder, pages) {
-    window.location.href = `viewer.html?book=${folder}&pages=${pages}`;
+  function openBook(folder, pages, title) {
+    const overlay = document.getElementById("viewerOverlay");
+    const iframe = document.getElementById("viewerIframe");
+    iframe.src = `viewer.html?book=${folder}&pages=${pages}`;
+    overlay.style.display = "block";
+    document.body.style.overflow = 'hidden';
+    document.title = `📖 ${title}`;
+  }
+
+  function closeViewer() {
+    const overlay = document.getElementById("viewerOverlay");
+    const iframe = document.getElementById("viewerIframe");
+    iframe.src = "";
+    overlay.style.display = "none";
+    document.body.style.overflow = '';
+    document.title = "Craftie Joy FlipBook📖";
   }
 </script>
 
