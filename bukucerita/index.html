@@ -130,17 +130,18 @@
   </style>
 </head>
 <body>
+<div id="mainContent" style="display:none;">
+  <header>
+    <h1>Silahkan pilih buku cerita yang akan dibaca</h1>
+  </header>
 
-<header>
-  <h1>Silahkan pilih buku cerita yang akan dibaca</h1>
-</header>
+  <div id="bookshelf"></div>
 
-<div id="bookshelf"></div>
-
-<!-- Iframe Overlay -->
-<div id="viewerOverlay">
-  <button id="closeViewer" onclick="closeViewer()">Tutup</button>
-  <iframe id="viewerIframe" allowfullscreen></iframe>
+  <!-- Iframe Overlay -->
+  <div id="viewerOverlay">
+    <button id="closeViewer" onclick="closeViewer()">Tutup</button>
+    <iframe id="viewerIframe" allowfullscreen></iframe>
+  </div>
 </div>
 
 <script>
@@ -189,5 +190,7 @@
   }
 </script>
 
+<!-- Tempatkan auth.js paling bawah agar semua elemen sudah siap -->
+<script src="auth.js"></script>
 </body>
 </html>
