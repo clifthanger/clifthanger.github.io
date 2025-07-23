@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Rak Buku Cerita</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f2ede3;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+      color: #4e3c27;
+    }
+
+    #bookshelf {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 35px;
+      padding: 10px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+	.book {
+	  position: relative;
+	  background: #fff;
+	  border-radius: 10px;
+	  overflow: hidden;
+	  cursor: pointer;
+	  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+	  transition: transform 0.3s ease;
+	  width: 250px; /* fix lebar buku */
+	  aspect-ratio: 3 / 4; /* bentuk proporsi buku */
+	  display: flex;
+	  flex-direction: column;
+	  align-items: center;
+	  justify-content: flex-start;
+	}
+
+
+    .book:hover {
+      transform: translateY(-8px);
+    }
+
+    .book::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 15px;
+      background: linear-gradient(to right, #c49e68, #fff0e0);
+      border-right: 1px solid rgba(0,0,0,0.1);
+      z-index: 2;
+    }
+
+
+	.book img {
+	  width: 100%;
+	  height: 100%;
+	  object-fit: cover;
+	  display: block;
+	}
+
+
+
+
+	.book-title {
+	  padding: 6px 6px; /* atas-bawah 10px, kiri-kanan 8px */
+	  text-align: center;
+	  font-weight: 600;
+	  font-size: 0.95em;
+	  background: #fffef9;
+	  color: #5a4231;
+	  position: relative;
+	  z-index: 1;
+	}
+
+
+    @media (hover: hover) {
+      .book:hover::before {
+        background: linear-gradient(to right, #d9af7b, #fff5df);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Rak Buku Cerita</h1>
+</header>
+
+<div id="bookshelf"></div>
+
+<script>
+  const books = [
+    { title: "Kancil dan Buaya", folder: "KancilBuaya", pages: 12 },
+    { title: "Cindelaras", folder: "Cindelaras", pages: 12 },
+    // Tambahkan buku lain di sini
+  ];
+
+  const shelf = document.getElementById("bookshelf");
+
+  books.forEach(book => {
+    const container = document.createElement("div");
+    container.className = "book";
+    container.onclick = () => loadBook(book.folder, book.pages);
+
+    const img = document.createElement("img");
+    img.src = `data/${book.folder}/1.jpg`;
+    img.alt = book.title;
+
+    const title = document.createElement("div");
+    title.className = "book-title";
+    title.innerText = book.title;
+
+    container.appendChild(img);
+    container.appendChild(title);
+    shelf.appendChild(container);
+  });
+
+  function loadBook(folder, pages) {
+    window.location.href = `viewer.html?book=${folder}&pages=${pages}`;
+  }
+</script>
+
+</body>
+</html>
