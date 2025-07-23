@@ -1,4 +1,3 @@
-// auth.js
 document.addEventListener("DOMContentLoaded", () => {
   const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSRjwOYie3B5Jf4ETxcM0Ts48P1i4txaA14IUNNVlW3Ej8Wy7_KmogWpeUTpMnRKi1l-50v2QOiX4jg/pub?output=csv';
 
@@ -9,9 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .then(csv => {
       const rows = csv.trim().split('\n').map(line => line.split(','));
-      const credentials = rows.slice(1).map(([id, pass]) => ({ id: id.trim(), pass: pass.trim() }));
+      const credentials = rows.slice(1).map(([id, pass]) => ({ id: id.trim(), password: pass.trim() })); // perhatikan: 'password'
 
-      // Prompt login yang tidak bisa di-cancel
+// Prompt login yang tidak bisa di-cancel
       let inputId = "", inputPass = "";
       while (!inputId) {
         inputId = prompt("Masukkan ID:");
@@ -27,8 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
       );
 
       if (validUser) {
-        console.log("Login berhasil");
-        tampilkanBuku(); // ini harus didefinisikan juga
+        console.log("Login berhasil:", inputId);
+        tampilkanBuku();
       } else {
         alert("ID atau Password salah.");
         location.reload();
