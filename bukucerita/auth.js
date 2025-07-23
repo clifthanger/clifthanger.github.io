@@ -1,29 +1,41 @@
-// auth.js
 document.addEventListener("DOMContentLoaded", () => {
   const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSRjwOYie3B5Jf4ETxcM0Ts48P1i4txaA14IUNNVlW3Ej8Wy7_KmogWpeUTpMnRKi1l-50v2QOiX4jg/pub?output=csv';
 
-  fetch(CSV_URL)
-    .then(response => {
-      if (!response.ok) throw new Error("Network error");
-      return response.text();
-    })
-    .then(csv => {
-      const rows = csv.trim().split('\n').map(line => line.split(','));
-      const credentials = rows.slice(1).map(([id, pass]) => ({ id: id.trim(), pass: pass.trim() }));
+  function clean(value) {
+    return value.trim().replace(/^\uFEFF/, "");
+  }
 
-      let inputId = prompt("Masukkan ID:");
-      let inputPass = prompt("Masukkan Password:");
+  async function fetchCSV() {
+    const res = await fetch(CSV_URL);
+    const text = await res.text();
+    return text
+      .split("\n")
+      .map(row => row.split(",").map(cell => clean(cell)));
+  }
 
-      const isValid = credentials.some(entry => entry.id === inputId && entry.pass === inputPass);
+  document.getElementById("loginForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const inputId = clean(document.getElementById("id").value);
+    const inputPw = clean(document.getElementById("password").value);
+    const errorBox = document.getElementById("errorMsg");
 
-      if (isValid) {
-        document.getElementById("mainContent").style.display = "block";
+    try {
+      const credentials = await fetchCSV();
+      const user = credentials.find(row => row[0] === inputId && row[1] === inputPw);
+
+      if (user) {
+        if (inputId === "single") {
+          window.location.href = "/FlipBook/";
+        } else if (inputId === "bundling") {
+          window.location.href = "/bukucerita/";
+        } else {
+          errorBox.textContent = "Login berhasil tapi ID tidak dikenali.";
+        }
       } else {
-        document.body.innerHTML = "<h2 style='text-align:center;margin-top:20%'>🚫 ID atau Password salah.</h2>";
+        errorBox.textContent = "ID atau password salah.";
       }
-    })
-    .catch(err => {
-      console.error("Gagal memuat data autentikasi:", err);
-      document.body.innerHTML = "<h2 style='text-align:center;margin-top:20%'>🔌 Gagal memuat data autentikasi.</h2>";
-    });
+    } catch (err) {
+      errorBox.textContent = "Gagal mengambil data login.";
+    }
+  });
 });
