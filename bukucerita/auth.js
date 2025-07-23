@@ -11,19 +11,31 @@ document.addEventListener("DOMContentLoaded", () => {
       const rows = csv.trim().split('\n').map(line => line.split(','));
       const credentials = rows.slice(1).map(([id, pass]) => ({ id: id.trim(), pass: pass.trim() }));
 
-      let inputId = prompt("Masukkan ID:");
-      let inputPass = prompt("Masukkan Password:");
+// Prompt login yang tidak bisa di-cancel
+    let inputId = "", inputPass = "";
+    while (!inputId) {
+      inputId = prompt("Masukkan ID:");
+      if (inputId === null) inputId = "";
+    }
+    while (!inputPass) {
+      inputPass = prompt("Masukkan Password:");
+      if (inputPass === null) inputPass = "";
+    }
 
-      const isValid = credentials.some(entry => entry.id === inputId && entry.pass === inputPass);
+    const validUser = credentials.find(cred =>
+      cred.id === inputId && cred.password === inputPass
+    );
 
-      if (isValid) {
-        document.getElementById("mainContent").style.display = "block";
-      } else {
-        document.body.innerHTML = "<h2 style='text-align:center;margin-top:20%'>🚫 ID atau Password salah.</h2>";
-      }
-    })
-    .catch(err => {
-      console.error("Gagal memuat data autentikasi:", err);
-      document.body.innerHTML = "<h2 style='text-align:center;margin-top:20%'>🔌 Gagal memuat data autentikasi.</h2>";
-    });
+    if (validUser) {
+      console.log("Login berhasil");
+      tampilkanBuku();
+    } else {
+      alert("ID atau Password salah.");
+      location.reload(); // ulangi login
+    }
+
+  } catch (error) {
+    alert("Gagal memuat data autentikasi.");
+    console.error("Gagal memuat data autentikasi:", error);
+  }
 });
