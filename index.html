@@ -9,10 +9,6 @@
     body {
       font-family: 'Open Sans', sans-serif;
       background: linear-gradient(to right, #ffecd2, #fcb69f);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       margin: 0;
       user-select: none;
     }
@@ -23,13 +19,15 @@
       border-radius: 12px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.2);
       text-align: center;
+      width: 300px;
+      margin: 10vh auto;
     }
 
     .login-box h2 {
       margin-bottom: 1.5rem;
     }
 
-    input {
+    input, button {
       display: block;
       width: 100%;
       padding: 10px;
@@ -43,9 +41,6 @@
       background-color: #ff6f61;
       color: white;
       border: none;
-      padding: 10px 20px;
-      font-size: 1rem;
-      border-radius: 6px;
       cursor: pointer;
     }
 
@@ -57,11 +52,18 @@
       color: red;
       margin-top: 10px;
     }
+
+    #content-frame {
+      display: none;
+      width: 100vw;
+      height: 100vh;
+      border: none;
+    }
   </style>
 </head>
 <body>
 
-  <div class="login-box">
+  <div class="login-box" id="login-container">
     <h2>Masuk ke Buku Digital</h2>
     <form id="loginForm">
       <input type="text" id="id" placeholder="ID Pengguna" required />
@@ -71,9 +73,13 @@
     </form>
   </div>
 
+  <!-- iframe untuk menampilkan halaman flipbook/bukucerita -->
+  <iframe id="content-frame"></iframe>
+
   <script src="auth.js"></script>
 
   <script>
+    // Proteksi: Blok F12, klik kanan, ctrl+shift+i/u/j
     document.addEventListener('contextmenu', e => e.preventDefault());
     document.addEventListener('keydown', e => {
       if (e.key === "F12" || 
