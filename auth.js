@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (user) {
         if (inputId === "single") {
-          window.location.href = "/FlipBook/";
+          window.location.href = "/flipbook/";
         } else if (inputId === "bundling") {
           window.location.href = "/bukucerita/";
         } else {
