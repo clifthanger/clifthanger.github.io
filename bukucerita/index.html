@@ -192,5 +192,19 @@
 
 <!-- Tempatkan auth.js paling bawah agar semua elemen sudah siap -->
 <script src="auth.js"></script>
+<script>
+  // Cegah klik kanan
+  document.addEventListener("contextmenu", e => e.preventDefault());
+
+  // Cegah shortcut F12, Ctrl+U, Ctrl+Shift+I, Ctrl+S
+  document.addEventListener("keydown", e => {
+    if (
+      e.key === "F12" ||
+      (e.ctrlKey && (e.key === "u" || e.key === "s" || (e.shiftKey && e.key.toLowerCase() === "i")))
+    ) {
+      e.preventDefault();
+    }
+  });
+</script>
 </body>
 </html>
