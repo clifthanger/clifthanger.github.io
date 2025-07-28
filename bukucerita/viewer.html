@@ -4,12 +4,9 @@
   <meta charset="UTF-8">
   <title>Loading...</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Fonts dan CSS -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
   <link rel="stylesheet" href="flipbook/css/jquery.ui.css" />
   <link rel="stylesheet" href="flipbook/css/magazine2.css" />
-
   <style>
     body {
       margin: 0;
@@ -18,35 +15,22 @@
       background: #f2f2f2;
       overflow-y: scroll;
     }
-
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background-color: #f1f1f1;
-    }
-    ::-webkit-scrollbar-thumb {
-      background-color: #888;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background-color: #555;
-    }
-
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background-color: #f1f1f1; }
+    ::-webkit-scrollbar-thumb { background-color: #888; }
+    ::-webkit-scrollbar-thumb:hover { background-color: #555; }
     .controls-pdf {
       position: fixed;
       top: 10px;
       right: 10px;
       z-index: 9999;
     }
-
     .controls-pdf input.fs {
       width: 30px;
       height: 30px;
       cursor: pointer;
     }
-
-    #prev,
-    #next {
+    #prev, #next {
       display: inline-block;
       width: 30px;
       height: 30px;
@@ -59,19 +43,11 @@
       text-decoration: none;
       color: #333;
     }
-
-    #prev:hover,
-    #next:hover {
+    #prev:hover, #next:hover {
       background-color: #999;
     }
-
-    #back-button:hover {
-      background: #555;
-    }
-
-    .logo-backs {
-      opacity: 0.4;
-    }
+    #back-button:hover { background: #555; }
+    .logo-backs { opacity: 0.4; }
   </style>
 </head>
 <body>
@@ -101,7 +77,6 @@
   </div>
 </div>
 
-<!-- Script -->
 <script src="flipbook/extras/jquery.min.1.7.js"></script>
 <script src="flipbook/extras/jquery-ui-1.8.20.full.min.js"></script>
 <script src="flipbook/extras/modernizr.2.5.3.min.js"></script>
@@ -136,31 +111,11 @@
     direction: "ltr",
     flipsound: "flipbook/pics/page-flip.mp3",
     widthimg: "1440",
-    heightimg: "1440"
+    heightimg: "1440",
+    autoCenter: true,        // FIX: bantu stabilkan posisi canvas
+    acceleration: true       // FIX: bantu smooth transition
   };
 
-  // Load script turn.js dan zoom
-  yepnope({
-    test: Modernizr.csstransforms,
-    yep: ['flipbook/lib/turn.min.js'],
-    nope: ['flipbook/lib/turn.html4.min.js', 'flipbook/css/jquery.ui.html4.css'],
-    both: ['flipbook/lib/zoom.min.js', 'flipbook/css/jquery.ui.css', 'flipbook/js/magazineoff.js', 'flipbook/css/magazine2.css'],
-    complete: function () {
-      loadApp();
-
-      // Setup tombol navigasi manual
-      document.getElementById("prev").addEventListener("click", function (e) {
-        e.preventDefault();
-        $(".magazine").turn("previous");
-      });
-      document.getElementById("next").addEventListener("click", function (e) {
-        e.preventDefault();
-        $(".magazine").turn("next");
-      });
-    }
-  });
-
-  // Fullscreen helper
   const elem = document.getElementById("flipfull");
   function openFullscreen() {
     if (elem.requestFullscreen) {
@@ -173,13 +128,36 @@
       elem.msRequestFullscreen();
     }
   }
-  
-    // Update title halaman secara dinamis
+
   if (book) {
     const cleanTitle = book.replace(/[_\-]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
     document.title = cleanTitle + " FlipBook";
   }
 
+  yepnope({
+    test: Modernizr.csstransforms,
+    yep: ['flipbook/lib/turn.min.js'],
+    nope: ['flipbook/lib/turn.html4.min.js', 'flipbook/css/jquery.ui.html4.css'],
+    both: ['flipbook/lib/zoom.min.js', 'flipbook/css/jquery.ui.css', 'flipbook/js/magazineoff.js', 'flipbook/css/magazine2.css'],
+    complete: function () {
+      loadApp();
+
+      // Delay binding tombol setelah turn() siap
+      const checkReady = setInterval(() => {
+        if ($(".magazine").data("turn")) {
+          clearInterval(checkReady);
+          document.getElementById("prev").addEventListener("click", e => {
+            e.preventDefault();
+            $(".magazine").turn("previous");
+          });
+          document.getElementById("next").addEventListener("click", e => {
+            e.preventDefault();
+            $(".magazine").turn("next");
+          });
+        }
+      }, 100);
+    }
+  });
 </script>
 
 </body>
