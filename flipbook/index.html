@@ -13,25 +13,17 @@
     <script type="text/javascript" src="flipbook/lib/hash.js"></script>
 
     <script type="text/javascript">
-		// --- AWAL MODIFIKASI ---
-		// 1. Tentukan nama cerita secara langsung (hardcode)
 		const storyName = "TimunMas"; // <-- Letakkan nama foldernya di sini
-
-		// 2. Tentukan path folder data berdasarkan nama cerita
 		const dataPath = `../bukucerita/data/${storyName}/`;
-
-        // 3. Atur judul halaman berdasarkan nama cerita
         if (storyName) {
             document.title = storyName;
         } else {
             document.title = "Kancil dan Buaya"; // Judul default jika tidak ada parameter
         }
-
-        // 4. Konfigurasi flipbook yang sekarang dinamis
         var flipbookcfg = {
-            url: dataPath, // Menggunakan path dinamis
+            url: dataPath, 
             cover: 0,
-            numPages: 12, // Catatan: ini masih statis. Untuk membuatnya dinamis, Anda perlu info jumlah halaman.
+            numPages: 12,
             textTip: "Press ESC to exit. Use the keyboard arrows to change the page.",
             background: "./flipbook/files/backgrounds/back14.svg",
             showSlider: "null",
@@ -48,7 +40,6 @@
             widthimg: "1440",
             heightimg: "1440"
         };
-        // --- AKHIR MODIFIKASI ---
     </script>
 
     <style>
