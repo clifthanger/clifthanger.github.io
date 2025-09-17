@@ -37,6 +37,8 @@ document.addEventListener("DOMContentLoaded", () => {
           frame.src = "/TimunMas/";
         } else if (inputId === "malinkundang") {
           frame.src = "/MalinKundang/";
+        } else if (inputId === "keongmas") {
+          frame.src = "/KeongMas/";
         } else if (inputId === "kancil1") {
           frame.src = "/KancilBuaya/";
         } else {
