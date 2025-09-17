@@ -31,6 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
           frame.src = "/flipbook/";
         } else if (inputId === "bundling") {
           frame.src = "/bukucerita/";
+        } else if (inputId === "cindelaras") {
+          frame.src = "/cindelaras/";
         } else {
           errorBox.textContent = "Login berhasil tapi ID tidak dikenali.";
           return;
