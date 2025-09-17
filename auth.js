@@ -33,6 +33,12 @@ document.addEventListener("DOMContentLoaded", () => {
           frame.src = "/bukucerita/";
         } else if (inputId === "cindelaras") {
           frame.src = "/Cindelaras/";
+        } else if (inputId === "timunmas") {
+          frame.src = "/TimunMas/";
+        } else if (inputId === "malinkundang") {
+          frame.src = "/MalinKundang/";
+        } else if (inputId === "kancil1") {
+          frame.src = "/KancilBuaya/";
         } else {
           errorBox.textContent = "Login berhasil tapi ID tidak dikenali.";
           return;
