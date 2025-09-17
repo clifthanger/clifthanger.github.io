@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (inputId === "bundling") {
           frame.src = "/bukucerita/";
         } else if (inputId === "cindelaras") {
-          frame.src = "/cindelaras/";
+          frame.src = "/Cindelaras/";
         } else {
           errorBox.textContent = "Login berhasil tapi ID tidak dikenali.";
           return;
