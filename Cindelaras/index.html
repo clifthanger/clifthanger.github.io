@@ -7,14 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://fonts.googleapis.com/css?family=Indie+Flower|Open+Sans:400,700|Ubuntu:400,700|Great+Vibes' rel='stylesheet' type='text/css'>
     
-    <script type="text/javascript" src="../bukucerita/flipbook/extras/jquery.min.1.7.js"></script>
-    <script type="text/javascript" src="../bukucerita/flipbook/extras/jquery-ui-1.8.20.full.min.js"></script>
-    <script type="text/javascript" src="../bukucerita/flipbook/extras/modernizr.2.5.3.min.js"></script>
-    <script type="text/javascript" src="../bukucerita/flipbook/lib/hash.js"></script>
+    <!-- PATH DIPERBAIKI -->
+    <script type="text/javascript" src="/bukucerita/flipbook/extras/jquery.min.1.7.js"></script>
+    <script type="text/javascript" src="/bukucerita/flipbook/extras/jquery-ui-1.8.20.full.min.js"></script>
+    <script type="text/javascript" src="/bukucerita/flipbook/extras/modernizr.2.5.3.min.js"></script>
+    <script type="text/javascript" src="/bukucerita/flipbook/lib/hash.js"></script>
 
     <script type="text/javascript">
 		const storyName = "Cindelaras";
-		const dataPath = `../bukucerita/data/${storyName}/`;
+        // PATH DIPERBAIKI
+		const dataPath = `/bukucerita/data/${storyName}/`;
         if (storyName) {
             document.title = storyName;
         } else {
@@ -25,7 +27,8 @@
             cover: 0,
             numPages: 12,
             textTip: "Press ESC to exit. Use the keyboard arrows to change the page.",
-            background: "../bukucerita/flipbook/files/backgrounds/back14.svg",
+            // PATH DIPERBAIKI
+            background: "/bukucerita/flipbook/files/backgrounds/back14.svg",
             showSlider: "null",
             showSocial: "0",
             showformat: "2",
@@ -59,50 +62,40 @@
 </head>
 <body>
     <div class="logo-backs"></div>
-    <audio id="audio" src="../bukucerita/flipbook/pics/page-flip.mp3"></audio>
+    <!-- PATH DIPERBAIKI -->
+    <audio id="audio" src="/bukucerita/flipbook/pics/page-flip.mp3"></audio>
     
-    <div class="flipbook-title" style="display: none;">
-        <h1></h1>
-        <h2></h2>
-        <p></p>
-    </div>
+    <div class="flipbook-title" style="display: none;"><h1></h1><h2></h2><p></p></div>
     
     <div id="canvas">
         <div class="controls-pdf">
             <div class="controlzoom" style="display:none">
-                <a href="#" id="zoomin" style="font-size:16px; color:#808080; text-decoration: none; font-weight:bold"><img src="../bukucerita/flipbook/pics/zoomin.png" /></a>
-                <a href="#" id="zoomout" style="font-size:16px; color:#808080; text-decoration: none; font-weight:bold"><img src="../bukucerita/flipbook/pics/zoomout.png" /></a>
+                <!-- PATH DIPERBAIKI -->
+                <a href="#" id="zoomin"><img src="/bukucerita/flipbook/pics/zoomin.png" /></a>
+                <a href="#" id="zoomout"><img src="/bukucerita/flipbook/pics/zoomout.png" /></a>
             </div>
             
-            <a href="#" target="_blank"><img style="display:none;" src="../bukucerita/flipbook/pics/down-pdf.png" /></a>
-            <div class="zoom-icon zoom-icon-in"></div>
-            <input type="image" class="fs" src="../bukucerita/flipbook/pics/fs.png" onclick="openFullscreen();"/>
+            <a href="#" target="_blank"><img style="display:none;" src="/bukucerita/flipbook/pics/down-pdf.png" /></a>
+            <input type="image" class="fs" src="/bukucerita/flipbook/pics/fs.png" onclick="openFullscreen();"/>
             <a href="#" id="prev"></a>
             <a href="#" id="next"></a>
         </div>
         
         <div class="magazine-viewport" id="flipfull">
-            <div class="container">
-                <div class="magazine">
-                    <div ignore="1" class="next-button"></div>
-                    <div ignore="1" class="previous-button"></div>
-                </div>
-            </div>
-            <div class="bottom">
-                <div id="slider-bar" class="turnjs-slider">
-                    <div id="slider"></div>
-                </div>
-            </div>
+            <div class="container"><div class="magazine"><div ignore="1" class="next-button"></div><div ignore="1" class="previous-button"></div></div></div>
+            <div class="bottom"><div id="slider-bar" class="turnjs-slider"><div id="slider"></div></div></div>
         </div>
     </div>
     
-    <script type="text/javascript" src="../bukucerita/flipbook/js/core2.js"></script>
+    <!-- PATH DIPERBAIKI -->
+    <script type="text/javascript" src="/bukucerita/flipbook/js/core2.js"></script>
     <script type="text/javascript">
         yepnope({
             test: Modernizr.csstransforms,
-            yep: ['../bukucerita/flipbook/lib/turn.min.js'],
-            nope: ['../bukucerita/flipbook/lib/turn.html4.min.js', '../bukucerita/flipbook/css/jquery.ui.html4.css'],
-            both: ['../bukucerita/flipbook/lib/zoom.min.js', '../bukucerita/flipbook/css/jquery.ui.css', '../bukucerita/flipbook/js/magazineoff.js', '../bukucerita/flipbook/css/magazine2.css'],
+            // PATH DIPERBAIKI
+            yep: ['/bukucerita/flipbook/lib/turn.min.js'],
+            nope: ['/bukucerita/flipbook/lib/turn.html4.min.js', '/bukucerita/flipbook/css/jquery.ui.html4.css'],
+            both: ['/bukucerita/flipbook/lib/zoom.min.js', '/bukucerita/flipbook/css/jquery.ui.css', '/bukucerita/flipbook/js/magazineoff.js', '/bukucerita/flipbook/css/magazine2.css'],
             complete: loadApp
         });
     </script>    
