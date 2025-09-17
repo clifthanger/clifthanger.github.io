@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Flipbook Reader</title>
+    <meta name="description" content="A dynamic flipbook reader for Indonesian folktales.">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Indie+Flower|Open+Sans:400,700|Ubuntu:400,700|Great+Vibes' rel='stylesheet' type='text/css'>
+    
+    <script type="text/javascript" src="../bukucerita/flipbook/extras/jquery.min.1.7.js"></script>
+    <script type="text/javascript" src="../bukucerita/flipbook/extras/jquery-ui-1.8.20.full.min.js"></script>
+    <script type="text/javascript" src="../bukucerita/flipbook/extras/modernizr.2.5.3.min.js"></script>
+    <script type="text/javascript" src="../bukucerita/flipbook/lib/hash.js"></script>
+
+    <script type="text/javascript">
+		const storyName = "Cindelaras";
+		const dataPath = `../bukucerita/data/${storyName}/`;
+        if (storyName) {
+            document.title = storyName;
+        } else {
+            document.title = "Kancil dan Buaya";
+        }
+        var flipbookcfg = {
+            url: dataPath,
+            cover: 0,
+            numPages: 12,
+            textTip: "Press ESC to exit. Use the keyboard arrows to change the page.",
+            background: "../bukucerita/flipbook/files/backgrounds/back14.svg",
+            showSlider: "null",
+            showSocial: "0",
+            showformat: "2",
+            companyLogo: "https://www.flipbookpdf.net/web/site/img/logonet.png",
+            description: "",
+            showDownload: "null",
+            backlink: "https://www.flipbookpdf.net",
+            opacity: "0.4",
+            name: "dynamic_flipbook.pdf",
+            direction: "ltr",
+            flipsound: "null",
+            widthimg: "1440",
+            heightimg: "1440"
+        };
+    </script>
+    <style>
+        body { overflow-y: scroll; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background-color: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background-color: #888; }
+        ::-webkit-scrollbar-thumb:hover { background-color: #555; }
+        .logo-backs { opacity: 0.4; }
+        .form-element1 input[type=text], .form-element1 select, .form-element1 textarea { border: 1px solid gray; padding: 5px; min-width: 74px; resize: vertical; }
+        .form-element1 { margin-top: 10px; margin-bottom: 12px; margin-left: 65px; }
+        @media only screen and (max-width: 750px) {
+            .flipbook-title, .zoom-icon { display: none !important; }
+            .controls-pdf { right: 20px !important; }
+        }
+        #ads { z-index: 100; position: fixed; bottom: 14px; text-align: center; padding: 2px; width: 100%; }
+    </style>
+</head>
+<body>
+    <div class="logo-backs"></div>
+    <audio id="audio" src="../bukucerita/flipbook/pics/page-flip.mp3"></audio>
+    
+    <div class="flipbook-title" style="display: none;">
+        <h1></h1>
+        <h2></h2>
+        <p></p>
+    </div>
+    
+    <div id="canvas">
+        <div class="controls-pdf">
+            <div class="controlzoom" style="display:none">
+                <a href="#" id="zoomin" style="font-size:16px; color:#808080; text-decoration: none; font-weight:bold"><img src="../bukucerita/flipbook/pics/zoomin.png" /></a>
+                <a href="#" id="zoomout" style="font-size:16px; color:#808080; text-decoration: none; font-weight:bold"><img src="../bukucerita/flipbook/pics/zoomout.png" /></a>
+            </div>
+            
+            <a href="#" target="_blank"><img style="display:none;" src="../bukucerita/flipbook/pics/down-pdf.png" /></a>
+            <div class="zoom-icon zoom-icon-in"></div>
+            <input type="image" class="fs" src="../bukucerita/flipbook/pics/fs.png" onclick="openFullscreen();"/>
+            <a href="#" id="prev"></a>
+            <a href="#" id="next"></a>
+        </div>
+        
+        <div class="magazine-viewport" id="flipfull">
+            <div class="container">
+                <div class="magazine">
+                    <div ignore="1" class="next-button"></div>
+                    <div ignore="1" class="previous-button"></div>
+                </div>
+            </div>
+            <div class="bottom">
+                <div id="slider-bar" class="turnjs-slider">
+                    <div id="slider"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="../bukucerita/flipbook/js/core2.js"></script>
+    <script type="text/javascript">
+        yepnope({
+            test: Modernizr.csstransforms,
+            yep: ['../bukucerita/flipbook/lib/turn.min.js'],
+            nope: ['../bukucerita/flipbook/lib/turn.html4.min.js', '../bukucerita/flipbook/css/jquery.ui.html4.css'],
+            both: ['../bukucerita/flipbook/lib/zoom.min.js', '../bukucerita/flipbook/css/jquery.ui.css', '../bukucerita/flipbook/js/magazineoff.js', '../bukucerita/flipbook/css/magazine2.css'],
+            complete: loadApp
+        });
+    </script>    
+    
+    <script>
+        var elem = document.getElementById("flipfull");
+        function openFullscreen() {
+            if (elem.requestFullscreen) { elem.requestFullscreen(); } 
+            else if (elem.mozRequestFullScreen) { elem.mozRequestFullScreen(); } 
+            else if (elem.webkitRequestFullscreen) { elem.webkitRequestFullscreen(); } 
+            else if (elem.msRequestFullscreen) { elem.msRequestFullscreen(); } 
+            else if (elem.webkitEnterFullscreen) { elem.webkitEnterFullscreen(); }
+        }
+    </script>
+</body>
+</html>
